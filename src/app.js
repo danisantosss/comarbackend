@@ -5,7 +5,7 @@ import routerUsuario from "./router/routerUsuario.js";
 
 const allowedOrigins = [
   "https://projetocomar.onrender.com",
-  "https://stirring-daifuku-117c86.netlify.app"
+  "https://projetocomar.netlify.app"
 ];
 
 const corsOptions = {
