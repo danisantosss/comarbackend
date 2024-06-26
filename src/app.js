@@ -1,7 +1,13 @@
 import express from "express";
+import path from "path";
 import routerSistema from "./router/routerProjeto.js";
 import cors from "cors";
 import routerUsuario from "./router/routerUsuario.js";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const allowedOrigins = [
   "https://projetocomar.onrender.com",
@@ -27,8 +33,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 
+app.use(express.static(path.join(__dirname, '../dist')));
+
 app.use("/projeto", routerSistema);
 app.use("/usuario", routerUsuario);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist', 'index.html'));
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
